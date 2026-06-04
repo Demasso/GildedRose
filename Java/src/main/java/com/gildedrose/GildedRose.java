@@ -1,66 +1,67 @@
 package com.gildedrose;
 
 class GildedRose {
-    private static String _sulfur = "Sulfuras, Hand of Ragnaros";
-    private static String _backSt = "Backstage passes to a TAFKAL80ETC concert";
-    private static String _agedBr = "Aged Brie";
+	private static String _sulfur = "Sulfuras, Hand of Ragnaros";
+	private static String _backSt = "Backstage passes to a TAFKAL80ETC concert";
+	private static String _agedBr = "Aged Brie";
 
-    Item[] items;
+	Item[] items;
 
-    public GildedRose(Item[] items) {
-        this.items = items;
-    }
+	public GildedRose(Item[] items) {
+		this.items = items;
+	}
 
-    public void updateQuality() {
-        // this loop is so much better.
-        for (Item item : items) {
-            if (!item.name.equals(_agedBr) && !item.name.equals(_backSt)) {
-                if (item.quality > 0) {
-                    if (!item.name.equals(_sulfur)) {
-                        item.quality -- ;
-                    }
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+	public void updateQuality() {
+		// this loop is so much better.
+		for (Item item : items) {
 
-                    if (item.name.equals(_backSt)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality ++ ;
-                            }
-                        }
+			if (!item.name.equals(_sulfur)) {
+				item.sellIn = item.sellIn - 1;
+			}
+			
+			if (!item.name.equals(_agedBr) && !item.name.equals(_backSt)) {
+				if (item.quality > 0) {
+					if (!item.name.equals(_sulfur)) {
+						item.quality -- ;
+					}
+				}
+			} else {
+				if (item.quality < 50) {
+					item.quality = item.quality + 1;
 
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality ++ ;
-                            }
-                        }
-                    }
-                }
-            }
+					if (item.name.equals(_backSt)) {
+						if (item.sellIn < 10) {
+							if (item.quality < 50) {
+								item.quality ++ ;
+							}
+						}
 
-            if (!item.name.equals(_sulfur)) {
-                item.sellIn = item.sellIn - 1;
-            }
+						if (item.sellIn < 5) {
+							if (item.quality < 50) {
+								item.quality ++ ;
+							}
+						}
+					}
+				}
+			}
 
-            if (item.sellIn < 0) {
-                if (!item.name.equals(_agedBr)) {
-                    if (!item.name.equals(_backSt)) {
-                        if (item.quality > 0) {
-                            if (!item.name.equals(_sulfur)) {
-                                item.quality -- ;
-                            }
-                        }
-                    } else {
-                        item.quality = 0 ;
-                    }
-                } else {
-                    if (item.quality < 50) {
-                        item.quality ++ ;
-                    }
-                }
-            }
-        }
-    }
+			if (item.sellIn < 0) {
+				if (!item.name.equals(_agedBr)) {
+					if (!item.name.equals(_backSt)) {
+						if (item.quality > 0) {
+							if (!item.name.equals(_sulfur)) {
+								item.quality -- ;
+							}
+						}
+					} else {
+						item.quality = 0 ;
+					}
+				} else {
+					if (item.quality < 50) {
+						item.quality ++ ;
+					}
+				}
+			}
+		}
+	}
 }
