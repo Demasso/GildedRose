@@ -1,5 +1,5 @@
 package com.gildedrose;
-
+// Item class cannot be touched?
 public class Item {
 
     public String name;

@@ -14,44 +14,46 @@ class GildedRose {
 	public void updateQuality() {
 		// Item item : items loop, maybe there's a better way?
 		for (Item item : items) {
-			// exclude _sulfur right away as nothing ever changes to product
+			// Refactor by implementing switch with 4 cases, use subMethods()
+			
+			// Rule 0 : exclude _sulfur right away as nothing ever changes to product
 			if (item.name.equals(_sulfur)) continue;
 
-			// 1. decrease sellIn for the product:
+			// Rule 1 : decrease sellIn for the product:
 			item.sellIn -- ;
 			
 			// 2. handle quality
-			// _agedBr && _backSt improve in quality
+			// Rule 2.1 : _agedBr && _backSt improve in quality
 			if (item.name.equals(_agedBr) || item.name.equals(_backSt)) {
-				// quality can never be >50
+				// Rule 2.1.1 : quality can never be >50
 				if (item.quality < 50) {
-					// 2.a. _agedBr & _backSt increase in quality
-					item.quality ++ ;
+					// Rule 2.1.2 : _agedBr & _backSt increase in quality
+					item.quality ++ ; // >10 : +1
 
-					// 2.b. _backSt quality improves even more nearing sellIn end
+					// Rule 2.1.3 : _backSt quality improves even more nearing sellIn end
 					if (item.name.equals(_backSt)) {
-						if (item.sellIn < 10 && item.quality < 50) item.quality ++ ;
-						if (item.sellIn < 5 && item.quality < 50) item.quality ++ ;
+						if (item.sellIn < 10 && item.quality < 50) item.quality ++ ; // <10 : +2
+						if (item.sellIn < 5 && item.quality < 50) item.quality ++ ; // < 5 : +3
 					}
 				}
 
 			} else if (item.quality > 0) {
-				// 2.b. while other degrade in quality
+				// Rule 2.2 : while other degrade in quality
 				item.quality -- ;
 			}
 
-			// 3. in case of negative sellIn:
+			// Rule 3 : in case of negative sellIn:
 			if (item.sellIn < 0) {
 				if (item.name.equals(_agedBr)) {
-					// 3.a. increase _agedBr quality when sellIn has passed
+					// 3.1. increase _agedBr quality when sellIn has passed
 					if (item.quality < 50) item.quality ++ ;
 
 				} else if (item.name.equals(_backSt)) {
-					// 3.b. _backSt degrade immediately to 0
+					// 3.2. _backSt degrade immediately to 0
 					item.quality = 0 ;
 
 				} else {
-					// 3.c. other products decrases daily when negative sellIn
+					// 3.3. other products decrases daily when negative sellIn
 					if (item.quality > 0) item.quality -- ;
 				}
 			}
