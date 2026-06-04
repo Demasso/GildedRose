@@ -14,11 +14,13 @@ class GildedRose {
 	public void updateQuality() {
 		// this loop is so much better.
 		for (Item item : items) {
+			// exclude _sulfur right away as nothing ever changes to producte
+			if (item.name.equals(_sulfur)) continue;
 
-			if (!item.name.equals(_sulfur)) {
-				item.sellIn = item.sellIn - 1;
-			}
+			// 1. decrease sellIn for the product:
+			item.sellIn -- ;
 			
+			// 2. handle quality
 			if (!item.name.equals(_agedBr) && !item.name.equals(_backSt)) {
 				if (item.quality > 0) {
 					if (!item.name.equals(_sulfur)) {
@@ -27,7 +29,7 @@ class GildedRose {
 				}
 			} else {
 				if (item.quality < 50) {
-					item.quality = item.quality + 1;
+					item.quality++ ;
 
 					if (item.name.equals(_backSt)) {
 						if (item.sellIn < 10) {
@@ -45,6 +47,7 @@ class GildedRose {
 				}
 			}
 
+			// 3. in case of negative sellIn:
 			if (item.sellIn < 0) {
 				if (!item.name.equals(_agedBr)) {
 					if (!item.name.equals(_backSt)) {
