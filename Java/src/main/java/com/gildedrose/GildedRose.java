@@ -1,7 +1,7 @@
 package com.gildedrose;
 
 class GildedRose {
-	private static String _sulfur = "Sulfuras, Hand of Ragnaros";
+	private static String _sulfur = "Sulfuras, Hand of Ragnaros";   // never touched
 	private static String _backSt = "Backstage passes to a TAFKAL80ETC concert";
 	private static String _agedBr = "Aged Brie";
 
@@ -12,7 +12,7 @@ class GildedRose {
 	}
 
 	public void updateQuality() {
-		// this loop is so much better.
+		// Item item : items loop, maybe there's a better way?
 		for (Item item : items) {
 			// exclude _sulfur right away as nothing ever changes to product
 			if (item.name.equals(_sulfur)) continue;
@@ -21,7 +21,9 @@ class GildedRose {
 			item.sellIn -- ;
 			
 			// 2. handle quality
+			// _agedBr && _backSt improve in quality
 			if (item.name.equals(_agedBr) || item.name.equals(_backSt)) {
+				// quality can never be >50
 				if (item.quality < 50) {
 					// 2.a. _agedBr & _backSt increase in quality
 					item.quality ++ ;
