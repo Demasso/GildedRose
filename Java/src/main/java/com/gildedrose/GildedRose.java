@@ -23,10 +23,10 @@ class GildedRose {
 			// 2. handle quality
 			if (item.name.equals(_agedBr) || item.name.equals(_backSt)) {
 				if (item.quality < 50) {
-					// increase quality for _agedBr & _backSt
+					// 2.a. _agedBr & _backSt increase in quality
 					item.quality ++ ;
 
-					// _backSt quality improves even more nearing sellIn end
+					// 2.b. _backSt quality improves even more nearing sellIn end
 					if (item.name.equals(_backSt)) {
 						if (item.sellIn < 10 && item.quality < 50) item.quality ++ ;
 						if (item.sellIn < 5 && item.quality < 50) item.quality ++ ;
@@ -34,21 +34,23 @@ class GildedRose {
 				}
 
 			} else if (item.quality > 0) {
+				// 2.b. while other degrade in quality
 				item.quality -- ;
 			}
 
-			// 3. TODO in case of negative sellIn:
+			// 3. in case of negative sellIn:
 			if (item.sellIn < 0) {
-				if (!item.name.equals(_agedBr)) {
-					if (!item.name.equals(_backSt)) {
-						if (item.quality > 0) {
-							if (!item.name.equals(_sulfur)) item.quality -- ;
-						}
-					} else {
-						item.quality = 0 ;
-					}
-				} else {
+				if (item.name.equals(_agedBr)) {
+					// 3.a. increase _agedBr quality when sellIn has passed
 					if (item.quality < 50) item.quality ++ ;
+
+				} else if (item.name.equals(_backSt)) {
+					// 3.b. _backSt degrade immediately to 0
+					item.quality = 0 ;
+
+				} else {
+					// 3.c. other products decrases daily when negative sellIn
+					if (item.quality > 0) item.quality -- ;
 				}
 			}
 		}
