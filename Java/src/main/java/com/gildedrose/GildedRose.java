@@ -17,7 +17,7 @@ class GildedRose {
 	public void updateQuality() {
 		// Item item : items loop, maybe there's a better way?
 		for (Item item : items) {
-			// Refactor by implementing switch with 4 cases, use subMethods()
+			// Refactor by implementing switch with 5 cases (1 normal, 4 exceptions), use subMethods()
 
 			// Rule 0 : exclude _sulfur right away as nothing ever changes to product
 			if (item.name.equals(_sulfur)) continue;
