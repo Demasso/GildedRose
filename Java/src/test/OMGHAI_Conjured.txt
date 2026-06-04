@@ -1,0 +1,37 @@
+# Before implementation of "Conjured":
+
+OMGHAI! (original)
+-------- day 0 --------
+Conjured Mana Cake, 3, 6
+
+-------- day 1 --------
+Conjured Mana Cake, 2, 5 <- degrades by 1
+
+-------- day 2 --------
+Conjured Mana Cake, 1, 4 <- degrades by 1
+
+-------- day 3 --------
+Conjured Mana Cake, 0, 3 <- degrades by 1
+
+-------- day 4 --------
+Conjured Mana Cake, -1, 1 <- degrades by 1
+
+
+
+# After implementation of "Conjured":
+
+OMGHAI!
+-------- day 0 --------
+Conjured Mana Cake, 3, 6
+
+-------- day 1 --------
+Conjured Mana Cake, 2, 4 <- degrades by 2 as per requirements
+
+-------- day 2 --------
+Conjured Mana Cake, 1, 2 <- degrades by 2 as per requirements
+
+-------- day 3 --------
+Conjured Mana Cake, 0, 0 <- nothing left to degrade, still ages
+
+-------- day 4 --------
+Conjured Mana Cake, -1, 0 <- nothing left to degrade, still ages
