@@ -4,6 +4,9 @@ class GildedRose {
 	private static String _sulfur = "Sulfuras, Hand of Ragnaros";   // never touched
 	private static String _backSt = "Backstage passes to a TAFKAL80ETC concert";
 	private static String _agedBr = "Aged Brie";
+	private static String _conjrd = "Conjured Mana Cake";
+
+	// TODO: Implement conjured items
 
 	Item[] items;
 
@@ -15,15 +18,15 @@ class GildedRose {
 		// Item item : items loop, maybe there's a better way?
 		for (Item item : items) {
 			// Refactor by implementing switch with 4 cases, use subMethods()
-			
+
 			// Rule 0 : exclude _sulfur right away as nothing ever changes to product
 			if (item.name.equals(_sulfur)) continue;
 
-			// Rule 1 : decrease sellIn for the product:
+			// Rule 1 : Lower sellIn. CAN be negative!
 			item.sellIn -- ;
 			
 			// 2. handle quality
-			// Rule 2.1 : _agedBr && _backSt improve in quality
+			// Rule 2.1 : _agedBr && _backSt IMPROVE in quality
 			if (item.name.equals(_agedBr) || item.name.equals(_backSt)) {
 				// Rule 2.1.1 : quality can never be >50
 				if (item.quality < 50) {
@@ -38,8 +41,11 @@ class GildedRose {
 				}
 
 			} else if (item.quality > 0) {
-				// Rule 2.2 : while other degrade in quality
+				// Rule 2.2 : Lower Quality. Never negative!
 				item.quality -- ;
+
+				// Rule 2.3 : _conjrd degrades twice as fast
+				if (item.name.equals(_conjrd)) item.quality -- ;
 			}
 
 			// Rule 3 : in case of negative sellIn:
@@ -53,7 +59,7 @@ class GildedRose {
 					item.quality = 0 ;
 
 				} else {
-					// 3.3. other products decrases daily when negative sellIn
+					// 3.3. Quality degrades twice as fast, EXCEPT for above tow items.
 					if (item.quality > 0) item.quality -- ;
 				}
 			}
