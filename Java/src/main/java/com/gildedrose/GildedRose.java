@@ -6,8 +6,6 @@ class GildedRose {
 	private static String _agedBr = "Aged Brie";
 	private static String _conjrd = "Conjured Mana Cake";
 
-	// TODO: Implement conjured items
-
 	Item[] items;
 
 	public GildedRose(Item[] items) {
@@ -59,10 +57,20 @@ class GildedRose {
 					item.quality = 0 ;
 
 				} else {
-					// 3.3. Quality degrades twice as fast, EXCEPT for above tow items.
+					// 3.3. Quality degrades twice as fast, EXCEPT for above two items.
 					if (item.quality > 0) item.quality -- ;
 				}
 			}
+		}
+	}
+
+	private void setQuality(Item item, int qlty){
+		if (qlty == 0) {
+			item.quality = 0 ;
+
+		} else if (item.quality < 50) {
+			item.quality += qlty ;
+			item.quality = item.quality < 0 ? 0 : item.quality ;
 		}
 	}
 }
