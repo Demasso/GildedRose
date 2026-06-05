@@ -17,46 +17,29 @@ class GildedRose {
 		for (Item item : items) {
 			// todo: Refactor by implementing switch with 5 cases (1 normal, 4 exceptions), use subMethods()
 
-			// Rule 0 : exclude _sulfur right away as nothing ever changes to product
-			if (item.name.equals(_sulfur)) continue;
+			if (item.name.equals(_sulfur)) continue; // Rule 0 : exclude _sulfur right away as nothing ever changes to product
 
-			// Rule 1 : Lower sellIn. CAN be negative!
-			item.sellIn -- ;
+			item.sellIn -- ; // Lower sellIn. CAN be negative!
 			
-			// 2. handle quality
-			// Rule 2.1 : _agedBr && _backSt IMPROVE in quality
-			if (item.name.equals(_agedBr) || item.name.equals(_backSt)) {
-				// Rule 2.1.2 : _agedBr & _backSt increase in quality
+			// Handle by item
+			if (item.name.equals(_agedBr)) { // Aged Brie
 				setQuality(item, 1); // >10 : +1
+				if (item.sellIn < 0) setQuality(item, 1); // quality incrases faster on negative sellIn
 
-				// Rule 2.1.3 : _backSt quality improves even more nearing sellIn end
-				if (item.name.equals(_backSt)) {
+			} else if (item.name.equals(_backSt)) { // Backstage
+				if (item.sellIn < 0) {
+					setQuality(item, 0); // Quality drops to 0 once sellIn reached
+
+				} else{
+					setQuality(item, 1); // >10 : +1
 					if (item.sellIn < 10) setQuality(item, 1); // <10 : +2
 					if (item.sellIn <  5) setQuality(item, 1); // < 5 : +3
 				}
 
-			} else if (item.quality > 0) {
-				// Rule 2.2 : Lower Quality. Never negative!
-				setQuality(item, -1);
-
-				// Rule 2.3 : _conjrd degrades twice as fast
-				if (item.name.equals(_conjrd)) setQuality(item, -1);
-			}
-
-			// Rule 3 : in case of negative sellIn:
-			if (item.sellIn < 0) {
-				if (item.name.equals(_agedBr)) {
-					// 3.1. increase _agedBr quality when sellIn has passed
-					setQuality(item, 1);
-
-				} else if (item.name.equals(_backSt)) {
-					// 3.2. _backSt degrade immediately to 0
-					setQuality(item, 0);
-
-				} else {
-					// 3.3. Quality degrades twice as fast, EXCEPT for above two items.
-					setQuality(item, -1);
-				}
+			} else if (item.quality > 0) { // normal items
+				setQuality(item, -1); // normal item's quality degrades
+				if (item.sellIn < 0) setQuality(item, -1); // degrades even more once sellIn passed
+				if (item.name.equals(_conjrd)) setQuality(item, -1); // Conjured rule
 			}
 		}
 	}
@@ -67,7 +50,7 @@ class GildedRose {
 
 		} else if (item.quality < 50) {
 			item.quality += qlty ;
-			item.quality = item.quality < 0 ? 0 : item.quality ;
+			item.quality = item.quality < 0 ? 0 : item.quality ; // Quality cannot be negative!
 		}
 	}
 }
