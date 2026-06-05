@@ -1,10 +1,6 @@
 package com.gildedrose;
 
 class GildedRose {
-	private static String _sulfur = "Sulfuras, Hand of Ragnaros";   // never touched
-	private static String _backSt = "Backstage passes to a TAFKAL80ETC concert";
-	private static String _agedBr = "Aged Brie";
-	private static String _conjrd = "Conjured Mana Cake";
 
 	Item[] items;
 
@@ -19,16 +15,11 @@ class GildedRose {
 				case "Sulfuras, Hand of Ragnaros" :
 					break ;  // Exclude _sulfur right away as nothing ever changes to product
 
-
-
 				case "Aged Brie" :
 					item.sellIn -- ;
-
 					setQuality(item, 1); // >10 : +1
 					if (item.sellIn < 0) setQuality(item, 1); // quality incrases faster on negative sellIn
-
 					break ;
-
 
 				case "Backstage passes to a TAFKAL80ETC concert" :
 					item.sellIn -- ;
@@ -42,11 +33,6 @@ class GildedRose {
 						if (item.sellIn <  5) setQuality(item, 1); // < 5 : +3
 					}
 					break ;
-					
-				/* Conjured case grouped with normal
-				case "Conjured Mana Cake" :
-					item.sellIn -- ;
-					break ;*/
 					
 				default :
 					item.sellIn -- ;
