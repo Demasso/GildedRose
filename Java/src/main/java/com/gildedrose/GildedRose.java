@@ -54,3 +54,17 @@ class GildedRose {
 		}
 	}
 }
+
+/*
+	RUN INCLUDED TEST:
+
+	in root dir:
+	./gradlew -q text --args 30
+
+	or
+	
+	in Java dir:
+	python3 texttest_rig.py -a 30
+
+	Diff compare output with texttests/ThirtyDays/stdout.gr
+*/
