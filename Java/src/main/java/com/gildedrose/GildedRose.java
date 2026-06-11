@@ -15,7 +15,7 @@ class GildedRose {
 			if (item.name.equals("Sulfuras, Hand of Ragnaros")) continue;
 
 			item.sellIn -- ; // Lower sellIn. CAN be negative!
-			setItem();
+			item.setItem();
 		}
 	}
 }
