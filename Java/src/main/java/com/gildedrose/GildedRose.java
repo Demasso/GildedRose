@@ -8,16 +8,26 @@ class GildedRose {
 		this.items = items;
 	}
 
-	public void updateQuality() {
-		// Item item : items loop, todo: maybe there's a better way?
-		for (Item item : items) {
-			// Rule 0 : exclude "Sulfuras, Hand of Ragnaros" right away as nothing ever changes to product
-			if (item.name.equals("Sulfuras, Hand of Ragnaros")) continue;
+    public void updateQuality() {
+        // Item item : items loop, todo: maybe there's a better way?
+        for (Item item : items) {
+            switch(item.name) {
+                case "Sulfuras, Hand of Ragnaros" : break;
 
-			item.sellIn -- ; // Lower sellIn. CAN be negative!
-			item.setItem();
-		}
-	}
+                case "Aged Brie" : item.setAgedBrie();
+                    break;
+
+                case "Backstage passes to a TAFKAL80ETC concert" : item.setBackStage();
+                    break;
+
+                case "Conjured Mana Cake" : item.setConjured();
+                    break;
+
+                default : item.setDefault();
+                    break;
+            }
+        }
+    }
 }
 
 /*
