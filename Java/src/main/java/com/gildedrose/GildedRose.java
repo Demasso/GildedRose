@@ -40,7 +40,7 @@ class GildedRose {
 					if (item.quality > 0) { // normal items
 						setQuality(item, -1); // normal item's quality degrades
 						if (item.sellIn < 0) setQuality(item, -1); // degrades even more once sellIn passed
-						if (item.name.equals(_conjrd)) setQuality(item, -1); // Conjured rule
+						if (item.name.equals("Conjured Mana Cake")) setQuality(item, -1); // Conjured rule
 					}
 					break ;
 			}
