@@ -33,7 +33,7 @@ public class Item {
         } else if (quality > 0) { // normal items
             setQuality(-1); // normal item's quality degrades
             if (sellIn < 0) setQuality(-1); // degrades even more once sellIn passed
-            if (name.equals("Conjured Mana Cake")) setQuality(-1); // Conjured rule
+            if (name.equals("Conjured Mana Cake")) setQuality(-1); // Degrades tice as fast.
         }
     }
 
